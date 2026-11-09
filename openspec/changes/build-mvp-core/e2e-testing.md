@@ -1,28 +1,31 @@
 # E2E Testing Checklist｜MVP 核心功能
 
-> **狀態：測試計畫，尚未執行。** 實作後由 Playwright MCP 操作並留證；只有實際驗證通過才能勾選。AC07、AC08 依 proposal.md「審查決策」驗收。
+> **狀態：待執行。** 由 Playwright MCP 操作並留證；只有實際驗證通過才能勾選。AC07、AC08 依 proposal.md「審查決策」驗收。
 
 ## Test Setup
 
-- **Start URL / route：** 路由 `/`；實際 origin **TBD**，實作後使用終端機顯示的 Vite 位址，不假設連接埠。
+- **Start URL / route：** `http://127.0.0.1:5173/`，路由 `/`；由 `npm run dev -- --port 5173 --strictPort` 啟動。
 - **Viewport：** 桌面 1440 × 900，Chromium。此為本輪執行條件，不新增手機版產品驗收承諾。
 - **Test data / accounts：** 不需帳號。唯一目錄為 `product-info/shuter-products.json`，23 筆；不攔截／替換成假商品。KD-2619（以下簡稱 K）38 × 19 × 26；DB-26（D）51.7 × 37.05 × 18.55，單位 cm。
-- **Prerequisites：** 應用程式已實作、依 README 安裝依賴與啟動（預計 `npm install`、`npm run dev`，目前尚不存在）；確認起始頁可載入。沒有後端／資料庫／seed／登入依賴。
-- **UI 契約：** 目前沒有現成 selector。下列名稱來自 design.md D03／D06 的新介面設計；實作後若有變動，先同步文件。欄位「寬（左右，cm）」「深（前後，cm）」「高（cm）」、按鈕「套用空間」「放入配置」「移除」、圖面「收納配置區」、結果「配置檢查結果」、清單「異常明細」。商品動作需限定在指定商品的可見卡片或實例內，避免同名按鈕歧義。
+- **Prerequisites：** 應用程式已實作，依 README 執行 `npm install` 與 `npm run dev -- --port 5173 --strictPort`；確認起始頁可載入。沒有後端／資料庫／seed／登入依賴。
+- **UI 契約：** 欄位「寬（左右，cm）」「深（前後，cm）」「高（cm）」、按鈕「套用空間」「放入配置」「移除」、圖面「收納配置區」、結果「配置檢查結果」、清單「異常明細」。商品動作需限定在指定商品的可見卡片或實例內，避免同名按鈕歧義。
 - **隔離：** 每案使用全新瀏覽器 context 開啟 `/`（全新 context 沒有本機保存資料），確認沒有既有 placements。結束關閉該 context。E2E-018 例外，會在同一 context 內重新整理。
 - **座標：** 以可見空間邊框左上角為 (0,0)，x 向右、y 向後。拖曳使用圖面與商品可見矩形的 bounding box、顯示比例及游標抓取偏移換算，不讀 React store、不從 console 注入 placements。一般案例選擇有明顯餘裕的位置；精確到 0.01 cm 的案例由下方 QA fixtures 驗證。
 - **外部依賴：** 檢查來源連結的 href 是否符合 JSON 即可，不需官網在線或下單。商品圖片來自官網，可能載入失敗；只驗證每筆商品「有圖片或有替代圖示」，不以官網圖片成功載入作為通過條件。
-- **Evidence：** 實作後將各案指定截圖、可見文字與必要紀錄存於本 change 的 `evidence/`，以 case ID 命名；本階段不建立假證據。記錄 console error 及失敗的應用程式資源請求。
+- **Evidence：** 將各案指定截圖、可見文字與必要紀錄存於本 change 的 `e2e-evidence/`，以 case ID 命名；記錄 console error 及失敗的應用程式資源請求。
 
 ## 1. 空間與目錄
 
-- [ ] E2E-001 初始狀態不得假稱符合
+- [x] E2E-001 初始狀態不得假稱符合
   - **優先級：** Critical
   - **前置條件：** 全新 context，尚未設定空間。
   - **操作：**
     1. 開啟 `/`，查看三軸欄位、方向／公分說明與「配置檢查結果」。
   - **預期結果：** 尚無有效空間，不出現成功的「依所列尺寸，符合全部限制」判定；不要求特定空配置文案。
   - **證據：** 初始畫面截圖與結果文字，記錄啟動相關 console／network 錯誤。
+  - **Last run:** `2026-11-09 22:46 Asia/Taipei` — PASS
+  - **Screenshot evidence:** [`e2e-evidence/E2E-001-initial.png`](e2e-evidence/E2E-001-initial.png)
+  - **Observed evidence:** 結果區顯示「尚未設定空間」；應用程式資源與瀏覽器 console 無錯誤。
   - **清理：** 關閉 context。
 
 - [ ] E2E-002 設定正整數空間

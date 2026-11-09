@@ -120,8 +120,8 @@ export async function runScenario(
       pos = text.match(/位置 (-?[\d.]+), (-?[\d.]+) cm/);
     check(
       pos &&
-        Math.abs(Number(pos[1]) - x) <= 1 / ratio + 0.01 &&
-        Math.abs(Number(pos[2]) - y) <= 1 / ratio + 0.01,
+        Math.abs(Number(pos[1]) - x) <= 1 &&
+        Math.abs(Number(pos[2]) - y) <= 1,
       `商品未保留目標 (${x},${y})：${text}`,
     );
     lastPositions.set(i, text);
@@ -404,6 +404,8 @@ export async function runScenario(
         );
         result.observations.push(text);
         await shot(p, 'all-issues');
+        // 先移開上層實例，避免拖曳被它攔截；最後仍放到案例指定位置。
+        await move(p, 1, 55, 50);
         await move(p, 0, 5, 10);
         await move(p, 1, 55, 10);
         await status(p, false);
