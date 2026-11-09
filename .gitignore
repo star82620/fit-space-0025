@@ -1,0 +1,18 @@
+# macOS 系統檔
+.DS_Store
+
+# 套件與打包產出
+node_modules/
+dist/
+
+# 環境變數（MVP 不使用，預防誤提交）
+.env
+.env.*
+
+# Playwright 測試報告與暫存
+playwright-report/
+test-results/
+.playwright-mcp/
+
+# 記錄檔
+*.log
