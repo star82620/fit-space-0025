@@ -9,22 +9,22 @@
 
 ## 2. 建立前端與驗證環境
 
-- [ ] 2.1 建立 pnpm、Vite、React、TypeScript strict 專案與 React Router `/` 入口，加入 Tailwind CSS、Zod；以 `pnpm install`、`pnpm typecheck` 及 `pnpm build` 成功驗證，不新增後端／API／資料庫。
-- [ ] 2.2 設定 ESLint、Prettier、Playwright Test 的 geometry／e2e project 與獨立測試目錄；以 `pnpm lint`、`pnpm format:check`、Playwright 測試清單可被辨識驗證，geometry 執行不啟動瀏覽器。
-- [ ] 2.3 在 README 補上實際安裝、啟動、build、品質檢查及測試指令，並加上「本專案為課程作業練習，商品資料與圖片版權屬樹德」聲明；逐條執行相關指令確認可用，不虛構部署網址。
+- [x] 2.1 建立 npm、Vite、React、TypeScript strict 專案與 React Router `/` 入口，加入 Tailwind CSS、Zod；以 `npm install`、`npm run typecheck` 及 `npm run build` 成功驗證，不新增後端／API／資料庫。
+- [x] 2.2 設定 ESLint、Prettier、Playwright Test 的 geometry／e2e project 與獨立測試目錄；以 `npm run lint`、`npm run format:check`、Playwright 測試清單可被辨識驗證，geometry 執行不啟動瀏覽器。
+- [x] 2.3 在 README 補上實際安裝、啟動、build、品質檢查及測試指令，並加上「本專案為課程作業練習，商品資料與圖片版權屬樹德」聲明；逐條執行相關指令確認可用，不虛構部署網址。
 
 ## 3. 商品模型、精確尺寸與配置檢查核心
 
-- [ ] 3.1 建立不可變 Product、Space 與獨立 Placement 型別，透過 Zod 驗證並靜態匯入既有商品 JSON；以 23 個唯一 ID、正有限尺寸及代表小數值的 domain 測試驗證，商品資料檔保持原樣。
-- [ ] 3.2 實作十進位至定點轉換、固定方向與安全整數檢查；以兩位小數、負座標、恰好相等與超出表示能力的 domain 測試驗證，不以取整或寬鬆容差修改商品尺寸。
-- [ ] 3.3 依 design.md D04 實作無副作用的尺寸、四側越界（含方向）、高度、實例配對重疊及整體判定，並產生依放入順序排列的異常明細；以各類型獨立案例與多類異常累積的 domain 測試驗證，不短路為整體成功。
-- [ ] 3.4 將 e2e-testing.md 第 5 節品質案例轉成固定 fixtures 與獨立預期值，人工覆核標準答案後執行 `pnpm test:geometry`；驗證恰有 40 筆、20 符合／20 不符合、逐筆一致且重大尺寸誤判 0。
-- [ ] 3.5 在 README 記錄尺寸方向、計算精度、資料備註限制、固定案例執行與誤判率計算方式；以文件與 domain 測試契約一致驗證，不記錄未執行的通過結果。
+- [x] 3.1 建立不可變 Product、Space 與獨立 Placement 型別，透過 Zod 驗證並靜態匯入既有商品 JSON；以 23 個唯一 ID、正有限尺寸及代表小數值的 domain 測試驗證，商品資料檔保持原樣。
+- [x] 3.2 實作十進位至定點轉換、固定方向與安全整數檢查；以兩位小數、負座標、恰好相等與超出表示能力的 domain 測試驗證，不以取整或寬鬆容差修改商品尺寸。
+- [x] 3.3 依 design.md D04 實作無副作用的尺寸、四側越界（含方向）、高度、實例配對重疊及整體判定，並產生依放入順序排列的異常明細；以各類型獨立案例與多類異常累積的 domain 測試驗證，不短路為整體成功。
+- [x] 3.4 將 e2e-testing.md 第 5 節品質案例轉成固定 fixtures 與獨立預期值，人工覆核標準答案後執行 `npm run test:geometry`；驗證恰有 40 筆、20 符合／20 不符合、逐筆一致且重大尺寸誤判 0。
+- [x] 3.5 在 README 記錄尺寸方向、計算精度、資料備註限制、固定案例執行與誤判率計算方式；以文件與 domain 測試契約一致驗證，不記錄未執行的通過結果。
 
 ## 4. 空間設定與表單狀態
 
-- [ ] 4.1 實作空間寬／深／高表單、方向與單位說明，以字串草稿保存輸入；離開欄位或按「套用空間」時依 1～999 純數字規則驗證，無效時顯示欄位錯誤並沿用上一次有效空間、標示「仍使用上一次的有效空間」；以 domain 輸入驗證測試（含 0、-1、1.5、1e2、1000、999、前後空白）驗證。
-- [ ] 4.2 同組加入表單相關自動化瀏覽器測試並更新 README 的輸入限制說明；以對應 `pnpm test:e2e` 測試及文件對照驗證。
+- [x] 4.1 實作空間寬／深／高表單、方向與單位說明，以字串草稿保存輸入；離開欄位或按「套用空間」時依 1～999 純數字規則驗證，無效時顯示欄位錯誤並沿用上一次有效空間、標示「仍使用上一次的有效空間」；以 domain 輸入驗證測試（含 0、-1、1.5、1e2、1000、999、前後空白）驗證。
+- [ ] 4.2 同組加入表單相關自動化瀏覽器測試並更新 README 的輸入限制說明；以對應 `npm run test:e2e` 測試及文件對照驗證。
 
 ## 5. 商品目錄與資料來源呈現
 
@@ -36,7 +36,7 @@
 - [ ] 6.1 建立配置 reducer、獨立 instanceId、從目錄放入與「移除」單一實例的整合，商品方向固定且不修改目錄；以實例狀態測試與 layout-editing 對應瀏覽器自動化驗證同款多件獨立操作與移除。
 - [ ] 6.2 實作 SVG、Pointer Events、畫布座標轉換與拖曳更新，保留邊界外顯示／操作區域且不 clamp、吸回、轉向或自動排開；以座標轉換測試與對應瀏覽器自動化驗證。
 - [ ] 6.3 依 design.md D08 以 localStorage 保存有效空間與 placements，載入時以 Zod 驗證，損毀或指向不存在商品時以空白狀態開始；以保存／恢復／損毀資料的測試及重新整理的瀏覽器自動化驗證。
-- [ ] 6.4 同組更新 README 的配置操作、移除、保存與目前限制，完成新增、移動、移除及自由配置的回歸測試；以 `pnpm test:geometry` 與對應 `pnpm test:e2e` 通過驗證。
+- [ ] 6.4 同組更新 README 的配置操作、移除、保存與目前限制，完成新增、移動、移除及自由配置的回歸測試；以 `npm run test:geometry` 與對應 `npm run test:e2e` 通過驗證。
 
 ## 7. 即時警示與整體判定整合
 
@@ -46,6 +46,6 @@
 
 ## 8. 整體驗證與交付
 
-- [ ] 8.1 執行 `pnpm typecheck`、`pnpm lint`、`pnpm format:check`、`pnpm build`、`pnpm test:geometry`、`pnpm test:e2e`，確認各組既有檢查於整合後通過；記錄實際結果與未解問題，不重複建立各組已負責的測試。
+- [ ] 8.1 執行 `npm run typecheck`、`npm run lint`、`npm run format:check`、`npm run build`、`npm run test:geometry`、`npm run test:e2e`，確認各組既有檢查於整合後通過；記錄實際結果與未解問題，不重複建立各組已負責的測試。
 - [ ] 8.2 依 e2e-testing.md 整份清單使用 Playwright MCP 執行，僅勾選有實證的通過項目；完成標準為全部案例均有實際結果、失敗已修復並重測。
 - [ ] 8.3 核對 F01～F06、AC01～AC08 與追加功能、規格情境與實際驗證紀錄的對應，更新實作交付說明；以 `openspec validate build-mvp-core --strict` 通過、文件間無衝突且未改寫原始需求／商品尺寸驗證。
