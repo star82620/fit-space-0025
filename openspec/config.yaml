@@ -21,6 +21,19 @@ context: |
     - 測試：Playwright 端對端測試
     - 程式品質：ESLint + Prettier
 
+  專案原則：
+    - 產品需求以 sdd-input.md 為準（MVP v2），寫 proposal 與 specs 前必須先讀
+    - 不新增自動商品篩選、推薦，或 sdd-input.md 第 3.2 節排除的功能
+    - 規格中未確認的細節，要列出選項與取捨，由使用者決定；AI 暫定規則不得視為已確認需求
+    - 尺寸檢查寧可拒絕，不可錯誤放行：違反尺寸規則的配置不得被標示為符合限制
+    - sdd-input.md 第 10 節尚未決定是否需要後端與資料庫；design 若使用後端或資料庫，必須寫明理由與替代方案
+    - 變更上游需求時，保留舊版本、變更理由及受影響的規格項目
+
+rules:
+  proposal:
+    - 必須有「範圍外」段落，列出這次刻意不做的事
+    - 必須有「待釐清問題」段落；沒有就寫「無」，不可省略
+
 # Project context (optional)
 # Add only constraints that should guide OpenSpec artifacts and workflows.
 # Include constraints an agent cannot infer by reading the code.
