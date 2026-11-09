@@ -25,6 +25,7 @@ export type Placement = Readonly<{
   productId: string;
   x: number;
   y: number;
+  rotated?: boolean;
 }>;
 export type LayoutState = Readonly<{
   space: Space | null;

@@ -14,6 +14,7 @@ export type LayoutAction =
   | { type: 'space'; space: Space }
   | { type: 'add'; placement: Placement }
   | { type: 'move'; instanceId: string; x: number; y: number }
+  | { type: 'rotate'; instanceId: string }
   | { type: 'remove'; instanceId: string };
 
 export function layoutReducer(
@@ -31,6 +32,15 @@ export function layoutReducer(
         placements: state.placements.map((p) =>
           p.instanceId === action.instanceId
             ? { ...p, x: action.x, y: action.y }
+            : p,
+        ),
+      };
+    case 'rotate':
+      return {
+        ...state,
+        placements: state.placements.map((p) =>
+          p.instanceId === action.instanceId
+            ? { ...p, rotated: !p.rotated }
             : p,
         ),
       };
@@ -64,6 +74,7 @@ const savedLayoutSchema = z
         productId: z.string().refine((id) => productIndex.has(id)),
         x: coordinateSchema,
         y: coordinateSchema,
+        rotated: z.boolean().optional(),
       }),
     ),
   })
