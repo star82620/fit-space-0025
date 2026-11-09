@@ -16,3 +16,6 @@ test-results/
 
 # 記錄檔
 *.log
+
+# 簡報用的 Product Proposal 稿，不隨作業繳交
+/proposal.md
