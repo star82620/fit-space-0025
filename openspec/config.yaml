@@ -8,7 +8,7 @@ context: |
 
   技術棧（MVP 為純前端，不使用後端與資料庫）：
     - 語言：TypeScript（strict 模式）
-    - 套件管理：pnpm
+    - 套件管理：npm
     - 前端：React + Vite
       - 路由：React Router
       - 樣式：Tailwind CSS

@@ -60,7 +60,7 @@ flowchart TD
 
 ### D01｜純前端模組與資料界線
 
-依 `openspec/config.yaml` 使用 React、Vite、TypeScript strict、pnpm、React Router、Tailwind CSS、Zod，設定 ESLint／Prettier；這是現有專案約束。入口路由設計為 `/`，不額外新增導頁。
+依 `openspec/config.yaml` 使用 React、Vite、TypeScript strict、npm、React Router、Tailwind CSS、Zod，設定 ESLint／Prettier；這是現有專案約束。入口路由設計為 `/`，不額外新增導頁。
 
 建議檔案分工（皆為待實作路徑）：
 
@@ -125,7 +125,7 @@ SVG 變換須包含 viewBox 比例、畫布偏移、留白與捲動。保留商�
 
 ### D07｜測試與決策界線
 
-沿用專案規定 Playwright：同一 Test runner 建立 `geometry`（無瀏覽器 fixture）與 `e2e` project，不另外引入單元測試框架。命令設計為 `pnpm test:geometry`、`pnpm test:e2e`；實作時補至 `package.json` 與 README。
+沿用專案規定 Playwright：同一 Test runner 建立 `geometry`（無瀏覽器 fixture）與 `e2e` project，不另外引入單元測試框架。命令設計為 `npm run test:geometry`、`npm run test:e2e`；實作時補至 `package.json` 與 README。
 
 40 筆固定品質案例須先有獨立標準答案，再測判定器，包含 20 筆符合與 20 筆不符合。測試資料、預期值與實際結果分開保存；不能由待測函式產生預期值。端對端清單見 [e2e-testing.md](e2e-testing.md)，本階段尚未執行。
 

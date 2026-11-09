@@ -41,7 +41,7 @@
 
 ## Impact
 
-目前專案尚無 `package.json`、應用程式或測試，需新建純前端 React／Vite／TypeScript 專案，依專案設定採 pnpm、React Router、Tailwind CSS、Zod、Playwright、ESLint 與 Prettier。不新增後端、API 或資料庫；商品 JSON 為既有輸入，不重抓、不改尺寸。
+目前專案尚無 `package.json`、應用程式或測試，需新建純前端 React／Vite／TypeScript 專案，依專案設定採 npm、React Router、Tailwind CSS、Zod、Playwright、ESLint 與 Prettier。不新增後端、API 或資料庫；商品 JSON 為既有輸入，不重抓、不改尺寸。
 
 ## 範圍外
 
@@ -73,3 +73,7 @@ AI 初稿把下列問題列為待釐清；使用者審查後決定如下。原�
 
 - 商品內外尺寸不明時，目前沿用資料備註並提示「依所列尺寸檢查」，不刪減 23 筆。若之後要補證或排除特定商品，需另開變更。
 - 官網圖片是否允許長期引用，本次未查證；作業練習期間以聲明處理。
+
+### 套件管理調整
+
+使用者於本次實作階段指示改用已安裝的 npm，取代初稿的 pnpm；同步專案設定、設計、任務與測試命令，使用 package-lock.json。產品行為與驗收條件不變；舊設定保留於 Git 歷史。
