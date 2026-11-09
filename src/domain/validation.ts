@@ -6,6 +6,7 @@ import {
   type Space,
 } from './models';
 import { safeAdd, toUnits } from './precision';
+import { effectiveDimensions } from './rotation';
 
 export type Issue = Readonly<{
   kind: 'size' | 'boundary' | 'height' | 'overlap' | 'data';
@@ -43,10 +44,16 @@ export function validateLayout(
     try {
       if (!product || seen.has(placement.instanceId))
         throw new Error('商品或實例資料無效');
+      if (
+        placement.rotated !== undefined &&
+        typeof placement.rotated !== 'boolean'
+      )
+        throw new Error('旋轉狀態無效');
       seen.add(placement.instanceId);
+      const dimensions = effectiveDimensions(product, placement);
       const [w, d, h, x, y] = [
-        product.width,
-        product.depth,
+        dimensions.width,
+        dimensions.depth,
         product.height,
         placement.x,
         placement.y,
