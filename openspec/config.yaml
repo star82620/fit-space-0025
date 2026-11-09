@@ -1,0 +1,53 @@
+schema: spec-driven
+githubCopilot:
+  cloudAgent: true
+
+context: |
+  所有 OpenSpec 產出物（proposal、design、specs、tasks）一律使用繁體中文（zh-TW）撰寫。
+  程式識別字、檔案路徑、指令與技術名詞保留英文。
+
+  技術棧：
+    - 語言：前後端皆使用 TypeScript（strict 模式）
+    - 套件管理：pnpm
+    - 後端：Node.js（LTS）+ Express
+      - REST API，請求與回應皆為 JSON
+      - 資料庫：PostgreSQL，透過 Prisma ORM 存取（schema + migrations）
+      - 輸入驗證使用 Zod
+      - 設定透過環境變數管理（.env，不得提交至版本控制）
+    - 前端：React + Vite
+      - 路由：React Router
+      - 伺服器狀態／資料抓取：TanStack Query
+      - 樣式：Tailwind CSS
+    - 測試：Playwright 端對端測試
+    - 程式品質：ESLint + Prettier
+
+# Project context (optional)
+# Add only constraints that should guide OpenSpec artifacts and workflows.
+# Include constraints an agent cannot infer by reading the code.
+# Keep general project documentation and discoverable codebase facts out.
+# Example:
+#   context: |
+#     Designs and tasks must cover Windows, macOS, and Linux
+#     Write all artifacts in Spanish
+
+# Per-artifact rules (optional)
+# Add custom rules for specific artifacts.
+# Example:
+#   rules:
+#     proposal:
+#       - Keep proposals under 500 words
+#       - Always state what is out of scope
+#     tasks:
+#       - Break tasks into chunks of max 2 hours
+
+# Per-operation guidance (optional)
+# Add advisory guidance for how apply and archive work should be conducted.
+# This is separate from artifact rules above.
+# Example:
+#   operations:
+#     apply:
+#       guidance:
+#         - Keep test summaries concise
+#     archive:
+#       guidance:
+#         - Summarize the archive outcome before finishing

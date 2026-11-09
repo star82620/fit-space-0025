@@ -1,0 +1,4 @@
+interface:
+  display_name: "Taidev Apply Test Loop"
+  short_description: "Apply, test, and repair an OpenSpec change."
+  default_prompt: "Use $taidev-apply-test-loop to implement a change, run E2E tests, and repair failures until it passes."

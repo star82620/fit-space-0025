@@ -1,0 +1,4 @@
+interface:
+  display_name: "Taidev Test Change"
+  short_description: "Run an OpenSpec E2E checklist and record evidence."
+  default_prompt: "Use $taidev-test-change to execute the change E2E checklist and record passing evidence."
