@@ -51,6 +51,19 @@ npm run test:e2e
 
 瀏覽器測試清單與實際 Playwright MCP 證據分別保存在 [`e2e-testing.md`](openspec/changes/build-mvp-core/e2e-testing.md) 與該 change 的 `e2e-evidence/`。自動化測試的通過不自動勾選 MCP 清單；只有實際操作留證後才更新。
 
+### 本次交付驗證
+
+| 需求 | 對應驗證 |
+| --- | --- |
+| F01、AC07：空間輸入與無效值 | E2E-001～003、014；domain 輸入測試 |
+| F02：樹德 23 筆商品與來源 | E2E-004～005、017；商品資料測試、圖片失敗回歸測試 |
+| F03：固定方向放入、移動、移除與保存 | E2E-006～008、010、016、018；實例與保存測試 |
+| F04、AC01～AC04：尺寸、貼齊、越界、重疊與高度 | E2E-006～013；40 筆固定品質案例 |
+| F05、AC05～AC06：即時重檢與解除衝突 | E2E-006～007、010、014～016 |
+| F06、AC08：違規保留與多重異常明細 | E2E-010、013、015；異常累積測試 |
+
+本機驗證：`npm run typecheck`、`npm run lint`、`npm run format:check`、`npm run build` 全數通過；`npm run test:geometry` **49/49**、`npm run test:e2e` **19/19** 通過。Playwright MCP 清單 **18/18** 通過，截圖逐案連結於上述清單。這些結果只證明本次規格與測試環境下的行為，不等同實物適配保證。
+
 ## 專案結構
 
 | 路徑                               | 職責                                                   |

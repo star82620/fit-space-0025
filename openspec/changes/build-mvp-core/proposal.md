@@ -41,7 +41,7 @@
 
 ## Impact
 
-目前專案尚無 `package.json`、應用程式或測試，需新建純前端 React／Vite／TypeScript 專案，依專案設定採 npm、React Router、Tailwind CSS、Zod、Playwright、ESLint 與 Prettier。不新增後端、API 或資料庫；商品 JSON 為既有輸入，不重抓、不改尺寸。
+提案建立時，專案尚無 `package.json`、應用程式或測試；本次新建純前端 React／Vite／TypeScript 專案，依專案設定採 npm、React Router、Tailwind CSS、Zod、Playwright、ESLint 與 Prettier。不新增後端、API 或資料庫；商品 JSON 為既有輸入，不重抓、不改尺寸。
 
 ## 範圍外
 

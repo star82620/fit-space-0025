@@ -46,6 +46,6 @@
 
 ## 8. 整體驗證與交付
 
-- [ ] 8.1 執行 `npm run typecheck`、`npm run lint`、`npm run format:check`、`npm run build`、`npm run test:geometry`、`npm run test:e2e`，確認各組既有檢查於整合後通過；記錄實際結果與未解問題，不重複建立各組已負責的測試。
-- [ ] 8.2 依 e2e-testing.md 整份清單使用 Playwright MCP 執行，僅勾選有實證的通過項目；完成標準為全部案例均有實際結果、失敗已修復並重測。
-- [ ] 8.3 核對 F01～F06、AC01～AC08 與追加功能、規格情境與實際驗證紀錄的對應，更新實作交付說明；以 `openspec validate build-mvp-core --strict` 通過、文件間無衝突且未改寫原始需求／商品尺寸驗證。
+- [x] 8.1 執行 `npm run typecheck`、`npm run lint`、`npm run format:check`、`npm run build`、`npm run test:geometry`、`npm run test:e2e`，確認各組既有檢查於整合後通過；記錄實際結果與未解問題，不重複建立各組已負責的測試。
+- [x] 8.2 依 e2e-testing.md 整份清單使用 Playwright MCP 執行，僅勾選有實證的通過項目；完成標準為全部案例均有實際結果、失敗已修復並重測。
+- [x] 8.3 核對 F01～F06、AC01～AC08 與追加功能、規格情境與實際驗證紀錄的對應，更新實作交付說明；以 `openspec validate build-mvp-core --strict` 通過、文件間無衝突且未改寫原始需求／商品尺寸驗證。

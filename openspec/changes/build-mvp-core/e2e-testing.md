@@ -1,6 +1,6 @@
 # E2E Testing Checklist｜MVP 核心功能
 
-> **狀態：待執行。** 由 Playwright MCP 操作並留證；只有實際驗證通過才能勾選。AC07、AC08 依 proposal.md「審查決策」驗收。
+> **狀態：已執行，E2E-001～018 全數通過。** 各案由 Playwright MCP 操作並留證；AC07、AC08 依 proposal.md「審查決策」驗收。
 
 ## Test Setup
 
@@ -28,7 +28,7 @@
   - **Observed evidence:** 結果區顯示「尚未設定空間」；應用程式資源與瀏覽器 console 無錯誤。
   - **清理：** 關閉 context。
 
-- [ ] E2E-002 設定正整數空間
+- [x] E2E-002 設定正整數空間
   - **優先級：** High
   - **前置條件：** 全新 context。
   - **操作：**
@@ -36,9 +36,12 @@
     2. 查看空間邊框與尺寸／方向說明。
   - **預期結果：** 接受設定，顯示 100 × 80 × 40 cm 的依據；商品寬對應左右、深對應前後。後續放入及檢查使用該設定。
   - **證據：** 設定與配置區截圖、可見尺寸及方向文字。
+  - **Last run:** `2026-11-09 22:50 Asia/Taipei` — PASS
+  - **Screenshot evidence:** [`e2e-evidence/E2E-002-space.png`](e2e-evidence/E2E-002-space.png)
+  - **Observed evidence:** 顯示 100 × 80 × 40 cm，寬對應左右、深對應前後。 Console 與應用程式資源請求無錯誤。
   - **清理：** 關閉 context。
 
-- [ ] E2E-003 無效值不被接受、離開欄位才提示
+- [x] E2E-003 無效值不被接受、離開欄位才提示
   - **優先級：** Critical
   - **前置條件：** 每個子案例使用全新 context，沒有前次有效空間。
   - **操作：**
@@ -48,9 +51,12 @@
     4. 若欄位原生阻止該字元，記錄不能輸入的事實，不透過程式改 DOM 繞過。
   - **預期結果：** 輸入中不顯示錯誤，離開欄位後欄位旁顯示錯誤；無效值不建立有效空間，不被截斷／取絕對值後套用，不能產生有效的成功判定；999 被接受。
   - **證據：** 代表性拒絕狀態截圖、各軸／輸入值／可見結果表；原生欄位阻擋者另由 domain 驗證拒絕。
+  - **Last run:** `2026-11-09 22:50 Asia/Taipei` — PASS
+  - **Screenshot evidence:** [`e2e-evidence/E2E-003-typing.png`](e2e-evidence/E2E-003-typing.png)、[`e2e-evidence/E2E-003-blur.png`](e2e-evidence/E2E-003-blur.png)、[`e2e-evidence/E2E-003-rejected.png`](e2e-evidence/E2E-003-rejected.png)、[`e2e-evidence/E2E-003-upper-limit.png`](e2e-evidence/E2E-003-upper-limit.png)
+  - **Observed evidence:** 21 組無效輸入均拒絕，輸入中無錯誤，離開欄位後顯示錯誤；999 上限接受。 Console 與應用程式資源請求無錯誤。
   - **清理：** 關閉每個 context。
 
-- [ ] E2E-004 樹德 23 筆目錄、精度與來源
+- [x] E2E-004 樹德 23 筆目錄、精度與來源
   - **優先級：** High
   - **前置條件：** 全新 context，套用 100 × 80 × 40。
   - **操作：**
@@ -59,20 +65,26 @@
     3. 另開全新 context 設定 20 × 20 × 20，核對仍有 23 筆，超尺寸商品仍可自行選擇。
   - **預期結果：** 只列 JSON 的樹德 23 筆；不取整、不交換寬深，D 的 href 為 `https://www.shuter.com.tw/tw/product/db/db-26`；沒有自動篩除／推薦。
   - **證據：** 目錄名稱與數量紀錄、D 卡片截圖、來源 href、兩種空間下的目錄比較。
+  - **Last run:** `2026-11-09 22:51 Asia/Taipei` — PASS
+  - **Screenshot evidence:** [`e2e-evidence/E2E-004-catalog-100.png`](e2e-evidence/E2E-004-catalog-100.png)、[`e2e-evidence/E2E-004-catalog-20.png`](e2e-evidence/E2E-004-catalog-20.png)
+  - **Observed evidence:** 100 × 80 × 40：逐筆核對 23 筆名稱、品牌、尺寸、來源與可選狀態一致；20 × 20 × 20：逐筆核對 23 筆名稱、品牌、尺寸、來源與可選狀態一致；console 與應用程式資源請求無錯誤。
   - **清理：** 關閉 contexts。
 
-- [ ] E2E-005 尺寸備註可核對
+- [x] E2E-005 尺寸備註可核對
   - **優先級：** High
   - **前置條件：** 全新 context。
   - **操作：**
     1. 查看 DB-2621、D 與 FB-5336DR 的商品資訊及尺寸備註。
   - **預期結果：** 依序保留「官網標示為外徑」、「官網未標明是外尺寸或內尺寸」、「官網標示為外徑；摺疊式，這裡用展開後的尺寸」。不把全部商品稱為已確認外部最大尺寸。
   - **證據：** 三筆備註的可見文字與代表截圖。
+  - **Last run:** `2026-11-09 22:51 Asia/Taipei` — PASS
+  - **Screenshot evidence:** [`e2e-evidence/E2E-005-shuter-db-2621.png`](e2e-evidence/E2E-005-shuter-db-2621.png)、[`e2e-evidence/E2E-005-shuter-db-26.png`](e2e-evidence/E2E-005-shuter-db-26.png)、[`e2e-evidence/E2E-005-shuter-fb-5336dr.png`](e2e-evidence/E2E-005-shuter-fb-5336dr.png)
+  - **Observed evidence:** DB-2621 拼拼樂鞋盒：官網標示為外徑；DB-26 大房子整理盒：官網未標明是外尺寸或內尺寸；FB-5336DR 清水模摺疊收納箱：官網標示為外徑；摺疊式，這裡用展開後的尺寸；console 與應用程式資源請求無錯誤。
   - **清理：** 關閉 context。
 
 ## 2. 放入、移動與固定方向
 
-- [ ] E2E-006 正常放入與移動自動檢查
+- [x] E2E-006 正常放入與移動自動檢查
   - **優先級：** Critical
   - **前置條件：** 全新 context，套用 100 × 80 × 40。
   - **操作：**
@@ -80,9 +92,12 @@
     2. 將 K 拖到圖面內部，左上角約 (10,10)，放開後查看結果，不按任何檢查按鈕。
   - **預期結果：** 商品顯示且可移動，結果自動維持「依所列尺寸，符合全部限制」；不出現自身重疊警示。單件寬深方向保持 38 × 19。
   - **證據：** 放入及移動後截圖、可見商品數、位置變化與結果文字。
+  - **Last run:** `2026-11-09 22:51 Asia/Taipei` — PASS
+  - **Screenshot evidence:** [`e2e-evidence/E2E-006-added.png`](e2e-evidence/E2E-006-added.png)、[`e2e-evidence/E2E-006-moved.png`](e2e-evidence/E2E-006-moved.png)
+  - **Observed evidence:** 依所列尺寸，符合全部限制；第 1 件位置 10.11, 10.11 cm；依所列尺寸，符合全部限制；console 與應用程式資源請求無錯誤。
   - **清理：** 關閉 context。
 
-- [ ] E2E-007 同款多件獨立移動與重疊修正
+- [x] E2E-007 同款多件獨立移動與重疊修正
   - **優先級：** Critical
   - **前置條件：** 全新 context，套用 100 × 80 × 40。
   - **操作：**
@@ -91,9 +106,12 @@
     3. 將第二件移至約 (55,10)，解除衝突。
   - **預期結果：** 兩件可辨識，第一件位置不變；重疊時提示重疊、整體不符合且不排開／刪除；解除後自動符合，不必手動檢查。目錄 K 尺寸不變。
   - **證據：** 重疊與解除後各一張截圖、商品數量、第一件位置與結果文字。
+  - **Last run:** `2026-11-09 22:51 Asia/Taipei` — PASS
+  - **Screenshot evidence:** [`e2e-evidence/E2E-007-overlap.png`](e2e-evidence/E2E-007-overlap.png)、[`e2e-evidence/E2E-007-resolved.png`](e2e-evidence/E2E-007-resolved.png)
+  - **Observed evidence:** 第 1 件位置 10.11, 10.11 cm；第 2 件位置 20.15, 10.11 cm；不符合全部限制；第 2 件位置 55.29, 10.11 cm；依所列尺寸，符合全部限制；console 與應用程式資源請求無錯誤。
   - **清理：** 關閉 context。
 
-- [ ] E2E-008 不可旋轉及平面尺寸超限
+- [x] E2E-008 不可旋轉及平面尺寸超限
   - **優先級：** Critical
   - **前置條件：** 全新 context，套用 20 × 40 × 40。
   - **操作：**
@@ -101,20 +119,26 @@
     2. 檢查商品可用控制並移動一次。
   - **預期結果：** 保留寬 38、深 19，不交換成 19 × 38；提示尺寸／越界異常、整體不符合，商品仍存在。無旋轉控制或自動轉向。
   - **證據：** 商品、邊界、控制及不符合結果截圖。
+  - **Last run:** `2026-11-09 22:51 Asia/Taipei` — PASS
+  - **Screenshot evidence:** [`e2e-evidence/E2E-008-fixed-direction.png`](e2e-evidence/E2E-008-fixed-direction.png)
+  - **Observed evidence:** 不符合全部限制；第 1 件位置 2.11, 5.17 cm；不符合全部限制；console 與應用程式資源請求無錯誤。
   - **清理：** 關閉 context。
 
-- [ ] E2E-009 小數尺寸在配置中不取整
+- [x] E2E-009 小數尺寸在配置中不取整
   - **優先級：** Critical
   - **前置條件：** 全新 context，套用 100 × 37 × 40。
   - **操作：**
     1. 放入 D，檢視所用尺寸與異常結果。
   - **預期結果：** 商品深 37.05 大於空間 37，整體不符合，商品保留；不能因把深取成 37 而通過。
   - **證據：** D 尺寸、空間設定與不符合結果的同框截圖；其餘精確邊界由 QA 測試補足。
+  - **Last run:** `2026-11-09 22:51 Asia/Taipei` — PASS
+  - **Screenshot evidence:** [`e2e-evidence/E2E-009-decimal-depth.png`](e2e-evidence/E2E-009-decimal-depth.png)
+  - **Observed evidence:** 不符合全部限制；console 與應用程式資源請求無錯誤。
   - **清理：** 關閉 context。
 
 ## 3. 邊界、高度與整體判定
 
-- [ ] E2E-010 四側越界保留並可拖回
+- [x] E2E-010 四側越界保留並可拖回
   - **優先級：** Critical
   - **前置條件：** 右／左／後／前四個子案各用全新 context，套用 100 × 80 × 40，放入 K。
   - **操作：**
@@ -122,27 +146,36 @@
     2. 放開，記錄位置與結果；再將商品拖回約 (10,10)。
   - **預期結果：** 越界時提示異常、整體不符合，停留於放開位置且仍可取得；不吸回／刪除／阻止。拖回後自動符合。
   - **證據：** 四側各一張越界截圖，代表性拖回截圖與結果文字。
+  - **Last run:** `2026-11-09 22:51 Asia/Taipei` — PASS
+  - **Screenshot evidence:** [`e2e-evidence/E2E-010-右側.png`](e2e-evidence/E2E-010-右側.png)、[`e2e-evidence/E2E-010-左側.png`](e2e-evidence/E2E-010-左側.png)、[`e2e-evidence/E2E-010-後側.png`](e2e-evidence/E2E-010-後側.png)、[`e2e-evidence/E2E-010-前側.png`](e2e-evidence/E2E-010-前側.png)、[`e2e-evidence/E2E-010-returned.png`](e2e-evidence/E2E-010-returned.png)
+  - **Observed evidence:** 第 1 件位置 70.35, 10.11 cm；不符合全部限制；第 1 件位置 10.12, 10.11 cm；依所列尺寸，符合全部限制；第 1 件位置 -4.95, 10.11 cm；不符合全部限制；第 1 件位置 10.11, 10.11 cm；依所列尺寸，符合全部限制；第 1 件位置 10.11, 70.36 cm；不符合全部限制；第 1 件位置 10.11, 10.12 cm；依所列尺寸，符合全部限制；第 1 件位置 10.11, -4.95 cm；不符合全部限制；第 1 件位置 10.12, 10.12 cm；依所列尺寸，符合全部限制；console 與應用程式資源請求無錯誤。
   - **清理：** 關閉每個 context。
 
-- [ ] E2E-011 四側貼齊與高度相等合法
+- [x] E2E-011 四側貼齊與高度相等合法
   - **優先級：** Critical
   - **前置條件：** 全新 context，套用 38 × 19 × 26。
   - **操作：**
     1. 放入 K（設計起點為原點），查看所有邊界與結果。
   - **預期結果：** 四側貼齊、高度等於限制，顯示符合全部限制；無越界、重疊或高度超限。
   - **證據：** 空間尺寸、貼齊圖面與符合文字截圖；精確共邊／共角另由 QA fixtures 驗證。
+  - **Last run:** `2026-11-09 22:52 Asia/Taipei` — PASS
+  - **Screenshot evidence:** [`e2e-evidence/E2E-011-flush.png`](e2e-evidence/E2E-011-flush.png)
+  - **Observed evidence:** 38 × 19 × 26 cm 三軸貼齊合法，無異常明細。 Console 與應用程式資源請求無錯誤。
   - **清理：** 關閉 context。
 
-- [ ] E2E-012 高度超限仍保留商品
+- [x] E2E-012 高度超限仍保留商品
   - **優先級：** Critical
   - **前置條件：** 全新 context，套用 100 × 80 × 25。
   - **操作：**
     1. 放入 K，再移至約 (10,10)。
   - **預期結果：** 顯示高度 26 超過 25 的異常與整體不符合，移動不能消除高度問題；商品及選定位置均保留。
   - **證據：** 高度設定、商品尺寸、異常及保留位置截圖。
+  - **Last run:** `2026-11-09 22:52 Asia/Taipei` — PASS
+  - **Screenshot evidence:** [`e2e-evidence/E2E-012-height.png`](e2e-evidence/E2E-012-height.png)
+  - **Observed evidence:** 高 26 cm 超過空間 25 cm；商品移動後仍保留並顯示不符合。 Console 與應用程式資源請求無錯誤。
   - **清理：** 關閉 context。
 
-- [ ] E2E-013 多重異常與部分解除的 R06 底線
+- [x] E2E-013 多重異常與部分解除的 R06 底線
   - **優先級：** Critical
   - **前置條件：** 全新 context，套用 100 × 80 × 25。
   - **操作：**
@@ -150,11 +183,14 @@
     2. 將兩件分別移至約 (5,10) 與 (55,10)，解除平面衝突但保留高度超限。
   - **預期結果：** 兩階段均顯示整體不符合，商品可操作且位置保留；第二階段高度異常仍存在。此案不指定 AC08 的完整清單、排序、配對明細或解除動畫。
   - **證據：** 兩階段截圖、可見結果與高度異常文字、商品數量。
+  - **Last run:** `2026-11-09 22:52 Asia/Taipei` — PASS
+  - **Screenshot evidence:** [`e2e-evidence/E2E-013-all-issues.png`](e2e-evidence/E2E-013-all-issues.png)、[`e2e-evidence/E2E-013-remaining.png`](e2e-evidence/E2E-013-remaining.png)
+  - **Observed evidence:** 先同時列出兩件的右側越界、高度超限及重疊；移回後只保留兩件高度異常，整體仍不符合。 Console 與應用程式資源請求無錯誤。
   - **清理：** 關閉 context。
 
 ## 4. 輸入修改、異常明細、移除、圖片與保存
 
-- [ ] E2E-014 已有配置時輸入無效值，沿用上一次有效空間
+- [x] E2E-014 已有配置時輸入無效值，沿用上一次有效空間
   - **優先級：** High
   - **前置條件：** 全新 context，套用 100 × 80 × 40，放入一件 K 並移至約 (10,10)。
   - **操作：**
@@ -162,9 +198,12 @@
     2. 將高改為 25，按「套用空間」，觀察檢查結果。
   - **預期結果：** 第 1 步高欄位顯示錯誤，畫面標示「仍使用上一次的有效空間」與 100 × 80 × 40，商品位置與「符合全部限制」結果不變。第 2 步改用 100 × 80 × 25，自動顯示 K 高度超限、整體不符合。
   - **證據：** 兩步驟的截圖與可見文字。
+  - **Last run:** `2026-11-09 22:50 Asia/Taipei` — PASS
+  - **Screenshot evidence:** [`e2e-evidence/E2E-014-previous-space.png`](e2e-evidence/E2E-014-previous-space.png)、[`e2e-evidence/E2E-014-new-space.png`](e2e-evidence/E2E-014-new-space.png)
+  - **Observed evidence:** 無效高沿用 100 × 80 × 40 與原位置；套用高 25 後即時顯示高度異常。 Console 與應用程式資源請求無錯誤。
   - **清理：** 關閉 context。
 
-- [ ] E2E-015 異常明細同時列出、標示商品、部分解除
+- [x] E2E-015 異常明細同時列出、標示商品、部分解除
   - **優先級：** High
   - **前置條件：** 全新 context，套用 100 × 80 × 25。
   - **操作：**
@@ -172,9 +211,12 @@
     2. 將兩件移至約 (5,10) 與 (55,10)，再查看明細與配置區。
   - **預期結果：** 第 1 步明細同時列出兩件的高度超限、兩件的右側越界、兩件之間的重疊，依放入順序排列；兩件在配置區都有醒目標示與文字標記。第 2 步越界與重疊從明細消失、高度超限保留，兩件仍標示，整體不符合。
   - **證據：** 兩階段截圖與明細文字。
+  - **Last run:** `2026-11-09 22:52 Asia/Taipei` — PASS
+  - **Screenshot evidence:** [`e2e-evidence/E2E-015-all-issues.png`](e2e-evidence/E2E-015-all-issues.png)、[`e2e-evidence/E2E-015-remaining.png`](e2e-evidence/E2E-015-remaining.png)
+  - **Observed evidence:** 異常明細依放入順序列出 5 項、重疊標明雙方，兩件在圖面標示；解除平面衝突後僅剩 2 項高度異常。 Console 與應用程式資源請求無錯誤。
   - **清理：** 關閉 context。
 
-- [ ] E2E-016 移除已放入的商品
+- [x] E2E-016 移除已放入的商品
   - **優先級：** High
   - **前置條件：** 全新 context，套用 100 × 80 × 40。
   - **操作：**
@@ -182,9 +224,12 @@
     2. 對第二件按「移除」。
   - **預期結果：** 只剩第一件，位置不變；重疊異常自動消失，整體顯示符合全部限制；目錄仍有 K。
   - **證據：** 移除前後截圖、商品數量與結果文字。
+  - **Last run:** `2026-11-09 22:52 Asia/Taipei` — PASS
+  - **Screenshot evidence:** [`e2e-evidence/E2E-016-before-remove.png`](e2e-evidence/E2E-016-before-remove.png)、[`e2e-evidence/E2E-016-removed.png`](e2e-evidence/E2E-016-removed.png)
+  - **Observed evidence:** 移除第二件後，第一件位置不變，重疊消失，整體恢復符合。 Console 與應用程式資源請求無錯誤。
   - **清理：** 關閉 context。
 
-- [ ] E2E-017 商品圖片與作業練習聲明
+- [x] E2E-017 商品圖片與作業練習聲明
   - **優先級：** Medium
   - **前置條件：** 全新 context。
   - **操作：**
@@ -192,9 +237,12 @@
     2. 找到頁面上的聲明文字。
   - **預期結果：** 每筆商品都有圖片或替代圖示，名稱與尺寸照常顯示；頁面可見「本專案為課程作業練習，商品資料與圖片版權屬樹德」。
   - **證據：** 目錄截圖、聲明文字；記錄載入失敗的圖片數量（僅供參考，不影響通過）。
+  - **Last run:** `2026-11-09 22:52 Asia/Taipei` — PASS
+  - **Screenshot evidence:** [`e2e-evidence/E2E-017-images.png`](e2e-evidence/E2E-017-images.png)、[`e2e-evidence/E2E-017-notice.png`](e2e-evidence/E2E-017-notice.png)
+  - **Observed evidence:** 23 筆商品均有圖片或替代圖示，觀察時替代圖示 0 筆；版權聲明可見。 Console 與應用程式資源請求無錯誤。
   - **清理：** 關閉 context。
 
-- [ ] E2E-018 重新整理後保留配置
+- [x] E2E-018 重新整理後保留配置
   - **優先級：** High
   - **前置條件：** 全新 context，套用 100 × 80 × 40。
   - **操作：**
@@ -202,11 +250,14 @@
     2. 在同一 context 重新整理頁面。
   - **預期結果：** 空間 100 × 80 × 40、兩件商品與位置都恢復，檢查結果與重新整理前一致。
   - **證據：** 重新整理前後截圖。
+  - **Last run:** `2026-11-09 22:52 Asia/Taipei` — PASS
+  - **Screenshot evidence:** [`e2e-evidence/E2E-018-before-reload.png`](e2e-evidence/E2E-018-before-reload.png)、[`e2e-evidence/E2E-018-restored.png`](e2e-evidence/E2E-018-restored.png)
+  - **Observed evidence:** 重新整理後恢復 100 × 80 × 40 cm、兩件商品及相同位置與判定。 Console 與應用程式資源請求無錯誤。
   - **清理：** 關閉 context。保存資料損毀的情境由 domain 測試驗證，不在瀏覽器手動竄改本機資料。
 
 ## 5. 固定品質案例｜較低層驗證計畫
 
-以下是 domain fixtures 的獨立標準答案草案，**不是已執行 E2E，也不是 40 筆通過紀錄**。實作時逐列轉為固定資料，人工覆核標準答案後執行 `npm run test:geometry`。精確座標無需在瀏覽器注入或增加產品座標輸入功能。
+以下是 domain fixtures 的獨立標準答案，與瀏覽器 E2E 分開驗證。已轉為 `tests/geometry/quality-cases.ts` 的 40 筆固定資料，執行 `npm run test:geometry` 後，40 筆逐筆一致；geometry project 含其他防呆測試共 49/49 通過。精確座標無需在瀏覽器注入或增加產品座標輸入功能。
 
 空間欄為寬 × 深 × 高（cm）；未註明為 100 × 80 × 40。K＝KD-2619，D＝DB-26，S＝DB-13（37.05 × 26 × 18.55），B＝DB-2621（26.5 × 37.2 × 21.3）；同列多座標代表各自獨立實例。全部採固定寬深方向。
 
@@ -293,7 +344,7 @@
 | layout-validation：不把自身當重疊 | E2E-006；QA01 | 單件不自撞 |
 | layout-validation：新增與移動自動檢查 | E2E-006～E2E-007、E2E-010 | AC06 |
 | layout-validation：移動解除衝突 | E2E-007、E2E-010 | AC05 |
-| layout-validation：多重異常不能被單項通過覆蓋 | E2E-013；QA39 | R06，非完整 AC08 核准 |
+| layout-validation：多重異常不能被單項通過覆蓋 | E2E-013；QA39 | R06；AC08 完整明細另見 E2E-015 |
 | layout-validation：部分解除仍不符合 | E2E-013；QA40 | R06 |
 | layout-validation：多種異常同時列出 | E2E-015；QA39 | AC08、Q08-1～Q08-2 |
 | layout-validation：部分解除後只留剩餘異常 | E2E-015；QA40 | AC08、Q08-3 |
