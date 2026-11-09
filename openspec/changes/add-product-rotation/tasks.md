@@ -14,10 +14,10 @@
 
 ## 3. 畫布、互動與瀏覽器驗收
 
-- [ ] 3.1 在每件已放入商品的實例列加「旋轉」按鈕，連接 reducer、即時重檢與本機保存；畫布矩形及拖曳幾何使用有效寬深。以 `npm run build` 及瀏覽器操作確認畫面、位置和檢查同步。
-- [ ] 3.2 增補旋轉瀏覽器自動化測試，更新既有 E2E-008 過時的禁止旋轉斷言；執行 `npm run test:e2e`，確認原流程與新增流程通過。
-- [ ] 3.3 更新 `README.md` 中的操作及功能說明，移除現行介面的「不可旋轉」文字；檢查文件、畫面與 `layout-editing` 新規格一致，並執行 `npm run lint`、`npm run format:check`。
-- [ ] 3.4 使用 Playwright MCP 逐案執行 [e2e-testing.md](e2e-testing.md) 並保存證據；僅勾選實際通過案例，再以 `openspec validate add-product-rotation --strict` 確認變更文件有效。
+- [x] 3.1 在每件已放入商品的實例列加「旋轉」按鈕，連接 reducer、即時重檢與本機保存；畫布矩形及拖曳幾何使用有效寬深。以 `npm run build` 及瀏覽器操作確認畫面、位置和檢查同步。
+- [x] 3.2 增補旋轉瀏覽器自動化測試，更新既有 E2E-008 過時的禁止旋轉斷言；執行 `npm run test:e2e`，確認原流程與新增流程通過。
+- [x] 3.3 更新 `README.md` 中的操作及功能說明，移除現行介面的「不可旋轉」文字；檢查文件、畫面與 `layout-editing` 新規格一致，並執行 `npm run lint`、`npm run format:check`。
+- [x] 3.4 使用 Playwright MCP 逐案執行 [e2e-testing.md](e2e-testing.md) 並保存證據；僅勾選實際通過案例，再以 `openspec validate add-product-rotation --strict` 確認變更文件有效。
 
 ## Workflow follow-up
 

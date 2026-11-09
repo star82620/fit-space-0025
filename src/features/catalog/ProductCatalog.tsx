@@ -42,7 +42,7 @@ export function ProductCatalog({
           <h2 id="catalog-title">商品目錄</h2>
           <span className="count-pill">23 件</span>
         </div>
-        <p className="subtle">樹德 SHUTER · 固定寬深方向</p>
+        <p className="subtle">樹德 SHUTER · 放入後可手動旋轉</p>
       </div>
       <div className="catalog-list" aria-label="樹德商品目錄">
         {products.map((product) => (

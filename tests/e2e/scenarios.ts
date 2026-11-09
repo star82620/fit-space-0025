@@ -295,19 +295,34 @@ export async function runScenario(
         await add(p);
         await status(p, false);
         check(
-          (await p.getByRole('button', { name: /旋轉/ }).count()) === 0,
-          '出現旋轉控制',
+          (await rows(p)
+            .first()
+            .getByRole('button', { name: '旋轉第 1 件' })
+            .count()) === 1,
+          '缺少逐件旋轉控制',
         );
         check(
           (await p.getByTestId('placement-shape').getAttribute('width')) ===
             '38' &&
             (await p.getByTestId('placement-shape').getAttribute('height')) ===
               '19',
-          '商品被旋轉',
+          '商品放入時不應自動旋轉',
+        );
+        await rows(p)
+          .first()
+          .getByRole('button', { name: '旋轉第 1 件' })
+          .click();
+        await status(p, true);
+        check(
+          (await p.getByTestId('placement-shape').getAttribute('width')) ===
+            '19' &&
+            (await p.getByTestId('placement-shape').getAttribute('height')) ===
+              '38',
+          '手動旋轉後的畫布尺寸錯誤',
         );
         await move(p, 0, 2, 5);
         await status(p, false);
-        await shot(p, 'fixed-direction');
+        await shot(p, 'manual-rotation');
         break;
       case 'E2E-009':
         await setup(p, [100, 37, 40]);

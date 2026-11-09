@@ -44,6 +44,7 @@ export default function App() {
         productId: product.id,
         x: 0,
         y: 0,
+        rotated: false,
       },
     });
   }
@@ -94,6 +95,9 @@ export default function App() {
               }
               onRemove={(instanceId) =>
                 dispatch({ type: 'remove', instanceId })
+              }
+              onRotate={(instanceId) =>
+                dispatch({ type: 'rotate', instanceId })
               }
             />
             <ValidationPanel result={result} placements={state.placements} />

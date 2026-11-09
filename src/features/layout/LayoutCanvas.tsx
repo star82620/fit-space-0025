@@ -2,6 +2,7 @@ import { useRef, useState, type PointerEvent } from 'react';
 import { productIndex } from '../../data/catalog';
 import type { Placement, Space } from '../../domain/models';
 import { pointerToPosition } from '../../domain/precision';
+import { effectiveDimensions } from '../../domain/rotation';
 import type { Issue } from '../../domain/validation';
 
 type Props = {
@@ -10,6 +11,7 @@ type Props = {
   issues: readonly Issue[];
   onMove: (instanceId: string, x: number, y: number) => void;
   onRemove: (instanceId: string) => void;
+  onRotate: (instanceId: string) => void;
 };
 
 export function LayoutCanvas({
@@ -18,6 +20,7 @@ export function LayoutCanvas({
   issues,
   onMove,
   onRemove,
+  onRotate,
 }: Props) {
   const svg = useRef<SVGSVGElement>(null);
   const border = useRef<SVGRectElement>(null);
@@ -37,16 +40,16 @@ export function LayoutCanvas({
   function contentView() {
     const bounds = placements.map((p) => ({
       ...p,
-      product: productIndex.get(p.productId)!,
+      dimensions: effectiveDimensions(productIndex.get(p.productId)!, p),
     }));
     const width = space?.width ?? 100;
     const depth = space?.depth ?? 80;
     const minX = Math.min(0, ...bounds.map((p) => p.x)) - 20;
     const minY = Math.min(0, ...bounds.map((p) => p.y)) - 20;
     const maxX =
-      Math.max(width, ...bounds.map((p) => p.x + p.product.width)) + 20;
+      Math.max(width, ...bounds.map((p) => p.x + p.dimensions.width)) + 20;
     const maxY =
-      Math.max(depth, ...bounds.map((p) => p.y + p.product.depth)) + 20;
+      Math.max(depth, ...bounds.map((p) => p.y + p.dimensions.depth)) + 20;
     return { minX, minY, width: maxX - minX, height: maxY - minY };
   }
   const v = activeView ?? contentView();
@@ -94,7 +97,7 @@ export function LayoutCanvas({
           <span className="eyebrow">03 / 自由配置</span>
           <h2 id="canvas-title">試著擺進你的空間</h2>
         </div>
-        <span className="view-pill">俯視圖 · 不可旋轉</span>
+        <span className="view-pill">俯視圖 · 可手動旋轉 90°</span>
       </div>
       <div className="canvas-stage">
         <svg
@@ -158,8 +161,13 @@ export function LayoutCanvas({
           )}
           {placements.map((placement, index) => {
             const product = productIndex.get(placement.productId)!;
+            const dimensions = effectiveDimensions(product, placement);
             const invalid = affected.has(placement.instanceId);
-            const font = Math.min(product.width / 7, product.depth / 3.8, 3.6);
+            const font = Math.min(
+              dimensions.width / 7,
+              dimensions.depth / 3.8,
+              3.6,
+            );
             return (
               <g
                 key={placement.instanceId}
@@ -174,8 +182,8 @@ export function LayoutCanvas({
                   data-testid="placement-shape"
                   x={placement.x}
                   y={placement.y}
-                  width={product.width}
-                  height={product.depth}
+                  width={dimensions.width}
+                  height={dimensions.depth}
                   rx="1.2"
                   fill={invalid ? '#f9e5d8' : '#dfebe1'}
                   stroke={invalid ? '#ac5a35' : '#60836c'}
@@ -183,8 +191,8 @@ export function LayoutCanvas({
                 />
                 <text
                   pointerEvents="none"
-                  x={placement.x + product.width / 2}
-                  y={placement.y + product.depth / 2 - font / 2}
+                  x={placement.x + dimensions.width / 2}
+                  y={placement.y + dimensions.depth / 2 - font / 2}
                   textAnchor="middle"
                   fontSize={font}
                   fill={invalid ? '#843c20' : '#294d39'}
@@ -194,13 +202,15 @@ export function LayoutCanvas({
                 </text>
                 <text
                   pointerEvents="none"
-                  x={placement.x + product.width / 2}
-                  y={placement.y + product.depth / 2 + font}
+                  x={placement.x + dimensions.width / 2}
+                  y={placement.y + dimensions.depth / 2 + font}
                   textAnchor="middle"
                   fontSize={font * 0.75}
                   fill={invalid ? '#843c20' : '#42614c'}
                 >
-                  {invalid ? '⚠ 有異常' : `${product.width} × ${product.depth}`}
+                  {invalid
+                    ? '⚠ 有異常'
+                    : `${dimensions.width} × ${dimensions.depth}`}
                 </text>
               </g>
             );
@@ -248,6 +258,14 @@ export function LayoutCanvas({
                   位置 {placement.x}, {placement.y} cm
                 </small>
               </div>
+              <button
+                type="button"
+                className="rotate-button"
+                onClick={() => onRotate(placement.instanceId)}
+                aria-label={`旋轉第 ${index + 1} 件`}
+              >
+                旋轉
+              </button>
               <button
                 type="button"
                 className="remove-button"
